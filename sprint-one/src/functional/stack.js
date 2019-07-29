@@ -21,11 +21,12 @@ var Stack = function() {
     // get the size of the stack
     var length = Object.keys(storage).length;
 
+    var topKey = Number.parseInt(length) - 1;
     // copy the string on the top of the stack to another variable
-    var topOfStack = storage[length];
+    var topOfStack = storage[topKey];
 
     // delete that key:value pair from the storage object
-    delete storage[length];
+    delete storage[topKey];
 
     // return the string
     return topOfStack;
