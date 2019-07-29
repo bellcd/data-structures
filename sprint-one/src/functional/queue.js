@@ -21,7 +21,7 @@ var Queue = function() {
   };
 
   someInstance.dequeue = function() {
-    debugger;
+
     // find the key with the lowest value
     var keys = Object.keys(storage);
     keys.sort((a, b) => a - b);
