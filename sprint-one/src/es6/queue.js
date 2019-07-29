@@ -5,3 +5,7 @@ class Queue {
   }
 
 }
+
+// enqueue(string) - Add a string to the back of the queue
+// dequeue() - Remove and return the string at the front of the queue
+// size() - Return the number of items in the queue
