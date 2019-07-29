@@ -65,7 +65,6 @@ class Queue {
       // point at the key with the lowest number
       result = keys[0];
     }
-
     return result;
   }
 }
