@@ -15,9 +15,25 @@ var LinkedList = function() {
   };
 
   list.removeHead = function() {
+    var temp = list.head;
+    list.head = temp.next;
+    return temp.value;
   };
 
   list.contains = function(target) {
+    var node = this.head;
+    if (!node) {
+      return false;
+    } else if (node === target) {
+      return true;
+    }
+    while (node.next !== null) {
+      if (node.value === target || node.next.value === target) {
+        return true;
+      }
+      node = node.next;
+    }
+    return false;
   };
 
   return list;
