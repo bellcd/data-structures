@@ -30,7 +30,7 @@ treeMethods.contains = function(target) {
       searchChildren(target, children[i].children);
     }
     return output;
-  }
+  };
   return searchChildren(target, this.children);
 };
 
