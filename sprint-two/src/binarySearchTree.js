@@ -1,17 +1,16 @@
 var BinarySearchTree = function(value) {
-  let node = {};
-  node.value = value;
-  // think both of these values should start at null ??
-  node.left = left;
-  node.right = right;
 
-  return node;
+  this.value = value;
+  this.left = null;
+  this.right = null;
+
+
 };
 
 BinarySearchTree.prototype.insert = function(value) {
   // determine if value is greater than or less than current node's value
   let position;
-  if (value < position) {
+  if (this.value > value) {
     position = 'left';
   } else {
     position = 'right';
@@ -23,10 +22,44 @@ BinarySearchTree.prototype.insert = function(value) {
     this[position].insert(value);
   } else {
     // NO, set value at node[position]
-    this[position] = BinarySearchTree(value);
+    this[position] = new BinarySearchTree(value);
   }
 };
 
+BinarySearchTree.prototype.contains = function (value) {
+  let position;
+  if (this.value === value) {
+    return true
+  } else {
+    if (this.value > value) {
+      position = 'left';
+    } else {
+      position = 'right';
+    }
+    if (this[position]) {
+      return this[position].contains(value);
+    }
+  }
+  return false
+}
+
+BinarySearchTree.prototype.depthFirstLog = function (cb) {
+  cb (this.value)
+  // for (var key in this) {
+  //   if (key !== 'value' && this[key] !== null && this.hasOwnProperty(key)) {
+  //     this[key].depthFirstLog(cb);
+  //   }
+  // }
+  // BELOW IS AN ALTERNATE WAY OF SOLVING THIS. THECOMMENTED OUT
+  // PORTION ABOVE PASSES ALL TESTS AS WELL
+  if (this.left) {
+    this.left.depthFirstLog(cb);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(cb);
+  }
+
+}
 /*
- * Complexity: What is the time complexity of the above functions?
+ * Complexity: What is the time complexity of the above functions? O(n) for depthFirstLog, O(log n) for insert and contains.
  */
