@@ -29,7 +29,7 @@ BinarySearchTree.prototype.insert = function(value) {
 BinarySearchTree.prototype.contains = function (value) {
   let position;
   if (this.value === value) {
-    return true
+    return true;
   } else {
     if (this.value > value) {
       position = 'left';
@@ -40,11 +40,11 @@ BinarySearchTree.prototype.contains = function (value) {
       return this[position].contains(value);
     }
   }
-  return false
-}
+  return false;
+};
 
 BinarySearchTree.prototype.depthFirstLog = function (cb) {
-  cb (this.value)
+  cb (this.value);
   // for (var key in this) {
   //   if (key !== 'value' && this[key] !== null && this.hasOwnProperty(key)) {
   //     this[key].depthFirstLog(cb);
@@ -59,7 +59,7 @@ BinarySearchTree.prototype.depthFirstLog = function (cb) {
     this.right.depthFirstLog(cb);
   }
 
-}
+};
 /*
  * Complexity: What is the time complexity of the above functions? O(n) for depthFirstLog, O(log n) for insert and contains.
  */
