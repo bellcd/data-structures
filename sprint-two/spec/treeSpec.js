@@ -41,4 +41,11 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+// Saving this test for the breadthFirstLog in the advanced content
+  // it('should count the depth of the tree', function () {
+  //   tree.addChild(5);
+  //   tree.children[0].addChild(6);
+  //   expect(depthCounter()).to.equal(2);
+  // });
+
 });

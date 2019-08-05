@@ -54,7 +54,7 @@ describe('linkedList', function() {
   it('should return a rejection message if no value is added', function () {
     var output = linkedList.addToTail();
     expect(output).to.equal('You Must Pass In A Value');
-  })
+  });
 
   // add more tests here to test the functionality of linkedList
 });

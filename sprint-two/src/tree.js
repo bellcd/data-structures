@@ -34,6 +34,12 @@ treeMethods.contains = function(target) {
   return searchChildren(target, this.children);
 };
 
+// Saving this for when we do breadth first recursion
+// treeMethods.depthCounter = function() {
+//   // base case, counter is 1 ??
+//   // recursive case
+// };
+
 
 
 /*

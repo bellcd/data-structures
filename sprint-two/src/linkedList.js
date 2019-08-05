@@ -6,7 +6,7 @@ var LinkedList = function() {
 
   list.addToTail = function(value) {
     if (arguments.length === 0) {
-      return 'You Must Pass In A Value'
+      return 'You Must Pass In A Value';
     }
     var node = Node(value);
     if (list.head === null) {
