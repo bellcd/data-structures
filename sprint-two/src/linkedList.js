@@ -2,8 +2,12 @@ var LinkedList = function() {
   var list = {};
   list.head = null;
   list.tail = null;
+  list.length = 0;
 
   list.addToTail = function(value) {
+    if (arguments.length === 0) {
+      return 'You Must Pass In A Value'
+    }
     var node = Node(value);
     if (list.head === null) {
       list.head = node;
@@ -12,11 +16,13 @@ var LinkedList = function() {
       list.tail.next = node;
       list.tail = node;
     }
+    list.length++;
   };
 
   list.removeHead = function() {
     var temp = list.head;
     list.head = temp.next;
+    list.length--;
     return temp.value;
   };
 
