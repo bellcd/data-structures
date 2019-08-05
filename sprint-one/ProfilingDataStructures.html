@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Profiling Data Structures</title>
+</head>
+<body>
+  <script src="./src/functional/queue.js"></script>
+  <script src="./src/functional/stack.js"></script>
+  <script>
+    window.onload = handler;
+
+    function handler() {
+      let stackArr = [];
+      for (let i = 0; i < 10000; i++) {
+        stackArr.push(Stack());
+        stackArr[i].push(i);
+      }
+
+      let queueArr = [];
+      for (let i = 0; i < 10000; i++) {
+        queueArr.push(Queue());
+        queueArr[i].enqueue(i);
+      }
+    }
+
+
+  </script>
+</body>
+</html>
