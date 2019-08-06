@@ -54,6 +54,14 @@ Graph.prototype.forEachNode = function(cb) {
   }
 };
 
+Graph.prototype.directedOrUndirected = function (fromNode, toNode) {
+  if (this.hasEdge(fromNode, toNode) && this.hasEdge(toNode, fromNode)) {
+    return 'Undirected';
+  } else {
+    return 'Directed';
+  };
+};
+
 /*
  * Complexity: What is the time complexity of the above functions? O(n)
  */
