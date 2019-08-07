@@ -41,6 +41,6 @@ describe('binarySearchTree', function() {
   it('should return the path in an array', function () {
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
-    expect(binarySearchTree.makePath(3)).to.equal([5, 2, 3]);
+    expect(JSON.stringify(binarySearchTree.makePath(3))).to.equal(JSON.stringify([5, 2, 3]));
   });
 });
