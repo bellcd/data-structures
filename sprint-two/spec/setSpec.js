@@ -24,4 +24,10 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  it('should make sure all items are unique', function () {
+    set.add('Susan Sarandon');
+    var test = set.add('Susan Sarandon');
+    expect(test).to.equal('Items in a set must be unique');
+  });
+
 });

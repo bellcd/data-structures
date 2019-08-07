@@ -7,7 +7,11 @@ var Set = function() {
 var setPrototype = {};
 
 setPrototype.add = function(item) {
-  this._storage.push(item);
+  if (this._storage.indexOf(item) === -1) {
+    this._storage.push(item);
+  } else {
+    return 'Items in a set must be unique';
+  }
 };
 
 setPrototype.contains = function(item) {

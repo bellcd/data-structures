@@ -41,7 +41,10 @@ HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
 
   let bucket = this._storage.get(index);
-
+  if (!bucket) {
+    return new Error('bucket does not exist at key ' + k);
+  // return ('hash table does not contain key:value with key');
+  }
   if (bucket.length > 1) {
     // iterate through bucket to find tuple
     for (let i = 0; i < bucket.length; i++) {
@@ -52,6 +55,8 @@ HashTable.prototype.retrieve = function(k) {
   } else if (bucket[0]) {
     return bucket[0][1];
   }
+  return new Error('hash table does not contain key:value with key ' + k);
+  // return ('hash table does not contain key:value with key');
 };
 
 HashTable.prototype.remove = function(k) {

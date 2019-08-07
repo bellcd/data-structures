@@ -32,7 +32,10 @@ describe('hashTable', function() {
   it('should not contain values that were removed', function() {
     hashTable.insert('Steven', 'Tyler');
     hashTable.remove('Steven');
-    expect(hashTable.retrieve('Steven')).to.equal(undefined);
+    var badfn = function () {
+      throw hashTable.retrieve('Steven');
+     }
+    expect(badfn).to.throw();
   });
 
   it('should handle hash function collisions', function() {
@@ -45,6 +48,13 @@ describe('hashTable', function() {
     expect(hashTable.retrieve(v1)).to.equal(v1);
     expect(hashTable.retrieve(v2)).to.equal(v2);
     window.getIndexBelowMaxForKey = oldHashFunction;
+  });
+
+  it('should throw an error if we try to retrieve a key that doesn\'t exist', function () {
+    var badfn = function () {
+      throw hashTable.retrieve('Steven');
+     }
+    expect(badfn).to.throw();
   });
 
   // (Advanced! Remove the extra "x" when you want the following tests to run)

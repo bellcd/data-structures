@@ -9,7 +9,7 @@ var Graph = function() {
 Graph.prototype.addNode = function(node) {
   this.nodes[node] = {
     edges: {}
-  }
+  };
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
@@ -19,7 +19,7 @@ Graph.prototype.contains = function(node) {
   } else {
     return false;
   }
-}
+};
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
@@ -59,7 +59,7 @@ Graph.prototype.directedOrUndirected = function (fromNode, toNode) {
     return 'Undirected';
   } else {
     return 'Directed';
-  };
+  }
 };
 
 /*
