@@ -34,7 +34,7 @@ describe('hashTable', function() {
     hashTable.remove('Steven');
     var badfn = function () {
       throw hashTable.retrieve('Steven');
-     }
+    };
     expect(badfn).to.throw();
   });
 
@@ -53,7 +53,7 @@ describe('hashTable', function() {
   it('should throw an error if we try to retrieve a key that doesn\'t exist', function () {
     var badfn = function () {
       throw hashTable.retrieve('Steven');
-     }
+    };
     expect(badfn).to.throw();
   });
 
