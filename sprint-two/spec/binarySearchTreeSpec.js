@@ -37,4 +37,10 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3, 7]);
   });
+
+  it('should return the path in an array', function () {
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    expect(binarySearchTree.makePath(3)).to.equal([5, 2, 3]);
+  });
 });

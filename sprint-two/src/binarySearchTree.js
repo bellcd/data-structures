@@ -60,6 +60,32 @@ BinarySearchTree.prototype.depthFirstLog = function (cb) {
   }
 
 };
+
+BinarySearchTree.prototype.makePath = function (value) {
+  var arr = []; // [5, 2, 3]
+  var lastNum = [];
+  let position;
+  if (this.value === value) {
+    lastNum.push(value);
+    // [3]
+    return lastNum;
+  } else {
+    if (this.value > value) {
+      position = 'left';
+      arr.push(this.value);
+    } else {
+      position = 'right';
+      arr.push(this.value);
+    }
+    if (this[position]) {
+      arr = this[position].contains(value);
+    }
+    var output = arr.concat(lastNum);
+    // [5, 2].concat([3])
+    return output;
+  }
+};
+
 /*
  * Complexity: What is the time complexity of the above functions? O(n) for depthFirstLog, O(log n) for insert and contains.
  */
