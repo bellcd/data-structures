@@ -57,4 +57,19 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+
+  it('should create a new head when the addToHead method is called', function () {
+    linkedList.addToTail(1);
+    linkedList.addToTail(2);
+    linkedList.addToHead(3);
+    expect(linkedList.head.value).to.equal(3);
+  });
+
+  it('should remove a tail and assign a new tail', function () {
+    linkedList.addToTail(1);
+    linkedList.addToTail(2);
+    linkedList.addToTail(3);
+    linkedList.removeTail();
+    expect(linkedList.tail.value).to.equal(2);
+  });
 });

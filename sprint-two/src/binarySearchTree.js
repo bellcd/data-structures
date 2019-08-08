@@ -74,7 +74,7 @@ BinarySearchTree.prototype.makePath = function(value) {
       return [this.value].concat(this[position].makePath(value));
     }
   }
- };
+};
 
 /*
  * Complexity: What is the time complexity of the above functions? O(n) for depthFirstLog, O(log n) for insert and contains.
