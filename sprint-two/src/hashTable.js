@@ -4,6 +4,7 @@ var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
   this._counter = 0;
+  this._haveRemovedSomething = false; // assuming that when first building the hash table, you will select an appropriate _limit size. ie, only checking to see if we need to make _.storage smaller AFTER deliberately removing a tuple from the hash table.
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -37,6 +38,8 @@ HashTable.prototype.insert = function(k, v) {
     // push key:value tuple to bucket
     this._storage.get(index).push([k, v]);
   }
+
+  console.log('inserted: ', k, ':', v, '_limit: ', this._limit);
   this._counter++;
 };
 
@@ -66,6 +69,8 @@ HashTable.prototype.remove = function(k) {
   this.ratioCalculator();
   var index = getIndexBelowMaxForKey(k, this._limit);
 
+  console.log('remove: ', k, '_limit: ', this._limit);
+
   let bucket = this._storage.get(index);
   if (!bucket) {
     throw new Error('Key does not exist');
@@ -80,16 +85,18 @@ HashTable.prototype.remove = function(k) {
       --i;
     }
   }
+
   this._counter--;
+  this._haveRemovedSomething = true;
 };
 
 HashTable.prototype.ratioCalculator = function () {
   var tupleCount = this._counter;
-  if (tupleCount / this._limit > 0.75) {
+  if (tupleCount / this._limit >= 0.75) {
     this._limit = this._limit * 2;
     this.resize();
   }
-  if (tupleCount > 0 && tupleCount / this._limit < 0.25) {
+  if (this._haveRemovedSomething && tupleCount / this._limit <= 0.25) {
     this._limit = this._limit / 2;
     this.resize();
   }
@@ -104,18 +111,21 @@ HashTable.prototype.resize = function () {
     if (!bucket) {
       return;
     } else if (bucket.length === 1) {
-      // Make note to go through with debugger to see if we need one or two index values to get the k, v locations
-      this.insert (bucket[0][0], bucket[0][1]);
+      this.insert(bucket[0][0], bucket[0][1]);
+      // account for .insert() incrementing _counter, when what we're really doing here is rehasing the indices
+      this._counter--;
     } else {
-      bucket.forEach.call (this, function (tuple) {
-        this.insert (tuple[0], tuple[1]);
-      });
+      bucket.forEach(function(tuple) {
+        this.insert(tuple[0], tuple[1]);
+        this._counter--;
+      }, this);
     }
   });
+
+  this._haveRemovedSomething = false;
 };
 
 /*
  * Complexity: What is the time complexity of the above functions? Very often O(1), but worst case in O(n)
  */
-
 
