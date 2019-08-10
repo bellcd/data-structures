@@ -3,9 +3,11 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this._counter = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
+  this.ratioCalculator();
   var index = getIndexBelowMaxForKey(k, this._limit);
   if (!this._storage.get(index)) {
     // if bucket doesn't exist already, create bucket
@@ -35,6 +37,7 @@ HashTable.prototype.insert = function(k, v) {
     // push key:value tuple to bucket
     this._storage.get(index).push([k, v]);
   }
+  this._counter++;
 };
 
 HashTable.prototype.retrieve = function(k) {
@@ -60,9 +63,13 @@ HashTable.prototype.retrieve = function(k) {
 };
 
 HashTable.prototype.remove = function(k) {
+  this.ratioCalculator();
   var index = getIndexBelowMaxForKey(k, this._limit);
 
   let bucket = this._storage.get(index);
+  if (!bucket) {
+    throw new Error('Key does not exist');
+  }
 
   // loop through bucket
   for (let i = 0; i < bucket.length; i++) {
@@ -73,9 +80,39 @@ HashTable.prototype.remove = function(k) {
       --i;
     }
   }
+  this._counter--;
 };
 
+HashTable.prototype.ratioCalculator = function () {
+  var tupleCount = this._counter;
+  if (tupleCount / this._limit > 0.75) {
+    this._limit = this._limit * 2;
+    this.resize();
+  }
+  if (tupleCount > 0 && tupleCount / this._limit < 0.25) {
+    this._limit = this._limit / 2;
+    this.resize();
+  }
+};
 
+HashTable.prototype.resize = function () {
+  // This is the old storage array
+  var tempStorage = this._storage;
+  // Below is the new storage array that we will fill
+  this._storage = LimitedArray(this._limit);
+  tempStorage.each.call(this, function(bucket) {
+    if (!bucket) {
+      return;
+    } else if (bucket.length === 1) {
+      // Make note to go through with debugger to see if we need one or two index values to get the k, v locations
+      this.insert (bucket[0][0], bucket[0][1]);
+    } else {
+      bucket.forEach.call (this, function (tuple) {
+        this.insert (tuple[0], tuple[1]);
+      });
+    }
+  });
+};
 
 /*
  * Complexity: What is the time complexity of the above functions? Very often O(1), but worst case in O(n)
