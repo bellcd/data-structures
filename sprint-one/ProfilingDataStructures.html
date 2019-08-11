@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Profiling Data Structures</title>
+  <style>
+    button {
+      font-size: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- <script src="./src/functional/queue.js"></script>
+  <script src="./src/functional/stack.js"></script> -->
+
+  <!-- <script src="./src/functional-shared/queue.js"></script>
+  <script src="./src/functional-shared/stack.js"></script> -->
+
+  <!-- <script src="./src/prototypal/queue.js"></script>
+  <script src="./src/prototypal/stack.js"></script> -->
+
+  <!-- <script src="./src/pseudoclassical/queue.js"></script>
+  <script src="./src/pseudoclassical/stack.js"></script> -->
+
+  <script src="./src/es6/queue.js"></script>
+  <script src="./src/es6/stack.js"></script>
+  <script>
+    function handler() {
+      let stackArr = [];
+      var stack, queue;
+      for (let i = 0; i < 500; i++) {
+        // stackArr.push(Stack());
+        stackArr.push(new Stack());
+        stack = stackArr[i];
+        for (let j = 0; j < 500; j++) {
+          stack.push(j);
+          if (j % 2 === 0) {
+            stack.pop();
+          }
+        }
+        // console.log('stack index: ', i, 'stack size" ', stack.size());
+      }
+
+      let queueArr = [];
+      for (let i = 0; i < 500; i++) {
+        // queueArr.push(Queue());
+        queueArr.push(new Queue());
+        queue = queueArr[i];
+        for (let j = 0; j < 500; j++) {
+          queue.enqueue(j);
+          if (j % 2 === 0) {
+            queue.dequeue();
+          }
+        }
+        // console.log('queue index: ', i, 'queue size" ', queue.size());
+      }
+
+      alert('finished!');
+    }
+
+
+
+  </script>
+</body>
+  <button onclick="handler()">Profile Me!</button>
+</html>
